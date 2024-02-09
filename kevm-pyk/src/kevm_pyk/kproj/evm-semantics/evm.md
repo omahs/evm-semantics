@@ -326,7 +326,8 @@ The `#next [_]` operator initiates execution by:
          </k>
          <wordStack> WS </wordStack>
          <static> STATIC:Bool </static>
-      requires notBool ( #stackUnderflow(WS, OP) orBool #stackOverflow(WS, OP) )
+      requires notBool #stackUnderflow(WS, OP)
+       andBool notBool #stackOverflow(WS, OP)
        andBool notBool ( STATIC andBool #changesState(OP, WS) )
 
     rule <k> #next [ OP ] => #end EVMC_STACK_UNDERFLOW ... </k>
@@ -341,7 +342,8 @@ The `#next [_]` operator initiates execution by:
          <wordStack> WS </wordStack>
          <static> STATIC:Bool </static>
       requires STATIC andBool #changesState(OP, WS)
-       andBool notBool ( #stackUnderflow(WS, OP) orBool #stackOverflow(WS, OP) )
+       andBool notBool #stackUnderflow(WS, OP)
+       andBool notBool #stackOverflow(WS, OP) )
 ```
 
 ### Exceptional Checks
